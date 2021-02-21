@@ -1,6 +1,5 @@
 import numpy as np
 import argparse
-from imutils import resize
 import time
 import cv2
 import dlib
@@ -27,7 +26,10 @@ class FullModel():
     def predict(self, frame):
         src_hight, src_width = frame.shape[:2]
         dst_width = 300
-        frame = resize(frame, width=dst_width)
+        dim_h = (dst_width, src_hight)
+        dim_w = (dst_width, src_hight)
+        frame = cv2.resize(frame, dim_h)
+        frame = cv2.resize(frame, dim_w)
         factor = src_width / dst_width
         dst_hight = src_hight / factor
 
