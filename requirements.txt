@@ -11,7 +11,8 @@ googledrivedownloader==0.4
 googleDriveFileDownloader==1.2
 imutils==0.5.2
 numpy==1.15.4
-opencv-python==4.1.0.25
+oauthlib==3.1.0
+opencv-python==4.5.1.48
 pillow==8.1.0
 aiogram==2.11.2
 async-generator==1.10
