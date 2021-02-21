@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from bot import bot, dp
+from my_bot.bot import bot, dp
 from aiogram import executor
 
 if __name__ == "__main__":
