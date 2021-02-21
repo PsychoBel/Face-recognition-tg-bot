@@ -12,7 +12,6 @@ googleDriveFileDownloader==1.2
 imutils==0.5.2
 numpy==1.15.4
 opencv-python==4.1.0.25
-dlib==19.17.0
 pillow==8.1.0
 aiogram==2.11.2
 async-generator==1.10
