@@ -8,3 +8,7 @@ libx11-dev
 libatlas-base-dev
 libgtk-3-dev
 libboost-python-dev
+libxfixes3
+libxinerama-dev
+libxinerama1
+libxdamage1
