@@ -1,3 +1,7 @@
+pillow==8.1.0
+aiogram==2.11.2
+async-generator==1.10
+async-timeout==3.0.1
 chardet==4.0.0
 cmake==3.18.4.post1
 dlib==19.21.1
@@ -14,7 +18,4 @@ numpy==1.19.5
 oauthlib==3.1.0
 opencv-python==4.5.1.48
 pillow==8.1.0
-aiogram==2.11.2
-async-generator==1.10
-async-timeout==3.0.1
 aiohttp==3.7.3
