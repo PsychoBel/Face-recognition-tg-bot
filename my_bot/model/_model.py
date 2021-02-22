@@ -2,11 +2,13 @@ import numpy as np
 import imutils
 import cv2
 import dlib
+from os.path import join, dirname
 
 
 class FullModel():
     def __init__(self):
         # init age and gender parameters
+        directory = join(dirname(__file__), 'tmp_weights')
         MEAN_VALUE_1 = 78.4263377603
         MEAN_VALUE_2 = 87.7689143744
         MEAN_VALUE_3 = 114.895847746
@@ -14,13 +16,13 @@ class FullModel():
         self.age_list = ['(0, 2)','(4, 6)','(8, 12)','(15, 20)','(25, 32)','(38, 43)','(48, 53)','(60, 100)']
         self.gender_list = ['Male', 'Female']
         
-        self.net = cv2.dnn.readNetFromCaffe("../tmp_weights/deploy.prototxt", "../tmp_weights/res10_300x300_ssd_iter_140000.caffemodel")
+        self.net = cv2.dnn.readNetFromCaffe(f"{directory}/deploy.prototxt", f"{directory}/res10_300x300_ssd_iter_140000.caffemodel")
         self.age_net = cv2.dnn.readNetFromCaffe(
-                                "../tmp_weights/deploy_age.prototxt",
-                                "../tmp_weights/age_net.caffemodel")
+                                f"{directory}/deploy_age.prototxt",
+                                f"{directory}/age_net.caffemodel")
         self.gender_net = cv2.dnn.readNetFromCaffe(
-                                "../tmp_weights/deploy_gender.prototxt",
-                                "../tmp_weights/gender_net.caffemodel")
+                                f"{directory}/deploy_gender.prototxt",
+                                f"{directory}/gender_net.caffemodel")
         
     def predict(self, frame):
         src_hight, src_width = frame.shape[:2]
