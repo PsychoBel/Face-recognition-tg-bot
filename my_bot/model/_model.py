@@ -7,7 +7,7 @@ from os.path import join, dirname
 
 class FullModel():
     def __init__(self):
-        # init age and gender parameters
+        '''Initialize weights of model'''
         directory = join(dirname(__file__), 'tmp_weights')
         MEAN_VALUE_1 = 78.4263377603
         MEAN_VALUE_2 = 87.7689143744
@@ -25,6 +25,7 @@ class FullModel():
                                 f"{directory}/gender_net.caffemodel")
         
     def predict(self, frame):
+        '''Function for prediction gender and age'''
         src_hight, src_width = frame.shape[:2]
         dst_width = 300
         frame = imutils.resize(frame, width=dst_width)
@@ -34,7 +35,6 @@ class FullModel():
         detector = dlib.get_frontal_face_detector()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        # detect faces
         det_input = frame.transpose(2, 0, 1)
         det_input = det_input.reshape(1, *det_input.shape)
         self.net.setInput(det_input)
@@ -51,8 +51,7 @@ class FullModel():
                 rect = rect[1:]
             x1, y1, x2, y2 = rect
             x1, y1, x2, y2 = int(x1 * dst_width), int(y1 * dst_hight), int(x2 * dst_width), int(y2 * dst_hight)
-            
-            # extension
+
             a = 0.1
             aw = a * (x2 - x1)
             ah = a * (y2 - y1)
@@ -63,14 +62,11 @@ class FullModel():
             face_img = frame[y1:y2, x1:x2].copy()
 
             blob2 = cv2.dnn.blobFromImage(face_img, 1, (227, 227), self.MODEL_MEAN_VALUES, swapRB=False)
-
-            # Predict gender
             self.gender_net.setInput(blob2)
             gender_preds = self.gender_net.forward()
             gender = self.gender_list[gender_preds[0].argmax()]
             genders.append(gender)
-            
-            # Predict age
+
             self.age_net.setInput(blob2)
             age_preds = self.age_net.forward()
             age = self.age_list[age_preds[0].argmax()]
@@ -79,6 +75,7 @@ class FullModel():
 
 
 def transform(frame, rects, genders, ages):
+    '''Function for transform picture'''
     frame = frame.copy()
     font = cv2.FONT_HERSHEY_SIMPLEX
 
