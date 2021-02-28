@@ -87,12 +87,14 @@ async def predict(message):
 
 
 async def on_startup(dp):
+    '''Function fot bot start'''
     await bot.set_webhook(WEBHOOK_URL)
     logging.info(f"Start webhook..\tWEBAPP_HOST-{WEBAPP_HOST}; WEBAPP_PORT-{WEBAPP_PORT};\n"
                  f"WEBAPP_URL-{WEBHOOK_URL};")
 
 
 async def on_shutdown(dp):
+    '''Function fot bot shutdown'''
     logging.warning('Shutting down..')
     await dp.storage.close()
     await dp.storage.wait_closed()
