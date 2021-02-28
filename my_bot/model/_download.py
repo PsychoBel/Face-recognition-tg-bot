@@ -15,12 +15,11 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 class GoogleDriveClient	:
     def __init__(self):
         creds = None
-        directory = join(dirname(__file__), "credentials") # /home/psycho/programming/Face-recognition-tg-bot/credentials
+        directory = join(dirname(__file__), "credentials") 
         token_f = join(directory, 'token.pickle')
         if os.path.exists(token_f):
             with open(token_f, 'rb') as token:
                 creds = pickle.load(token)
-            # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
