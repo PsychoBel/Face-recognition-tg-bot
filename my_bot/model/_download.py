@@ -14,22 +14,22 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 class GoogleDriveClient	:
     def __init__(self):
-        creds = None
-        directory = join(dirname(__file__), "credentials") 
-        token_f = join(directory, 'token.pickle')
-        if os.path.exists(token_f):
-            with open(token_f, 'rb') as token:
-                creds = pickle.load(token)
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    join(directory, "credentials.json"), SCOPES)
-                creds = flow.run_local_server(port=0)
-            with open(token_f, 'wb') as token:
-                pickle.dump(creds, token)
-
+        token = os.environ['GOOGLE_TOKEN']
+#         creds = None
+#         directory = join(dirname(__file__), "credentials") 
+#         token_f = join(directory, 'token.pickle')
+#         if os.path.exists(token_f):
+#             with open(token_f, 'rb') as token:
+#                 creds = pickle.load(token)
+#         if not creds or not creds.valid:
+#             if creds and creds.expired and creds.refresh_token:
+#                 creds.refresh(Request())
+#             else:
+#                 flow = InstalledAppFlow.from_client_secrets_file(
+#                     join(directory, "credentials.json"), SCOPES)
+#                 creds = flow.run_local_server(port=0)
+#             with open(token_f, 'wb') as token:
+#                 pickle.dump(creds, token)
         self.service = build('drive', 'v3', credentials=creds)
         self.files = self.files_ids
 
