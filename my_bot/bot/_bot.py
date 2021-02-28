@@ -25,7 +25,7 @@ buttons_for_start.add(types.KeyboardButton(text="Tell me about your creator \U00
 
 @dp.message_handler(commands=['start'], state='*')
 async def satrt(message: types.Message):
-    """Test function."""
+    """Start function"""
     global user_name
     user_name = str(message.from_user.first_name)
     await message.answer(text=f"Hi, *{user_name}*, \nI am very smart bot \U0001F913, what can I do for you?",
